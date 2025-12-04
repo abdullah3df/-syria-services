@@ -122,11 +122,24 @@
             <div id="requests-list" class="space-y-4"></div>
         </section>
 
-        <section id="login" class="hidden-section fade-enter flex flex-col items-center justify-center min-h-[60vh]">
+        <section id="login" class="hidden-section fade-enter flex flex-col items-center justify-center min-h-[70vh]">
             <div class="bg-white w-full max-w-sm p-8 rounded-3xl shadow-xl border border-slate-100 text-center">
                 <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-800 text-2xl"><i class="fa-solid fa-user-lock"></i></div>
                 <h2 class="text-2xl font-bold text-slate-800 mb-2">تسجيل الدخول</h2>
-                <form onsubmit="handleLogin(event)" class="text-right space-y-4 mt-6">
+                <p class="text-slate-500 text-sm mb-6">مرحباً بعودتك</p>
+
+                <button onclick="simulateGoogleLogin()" class="w-full border border-slate-200 bg-white text-slate-700 py-3 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-slate-50 transition mb-6 shadow-sm">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
+                    الدخول عبر Google
+                </button>
+
+                <div class="relative flex py-2 items-center mb-6">
+                    <div class="flex-grow border-t border-slate-100"></div>
+                    <span class="flex-shrink-0 mx-4 text-slate-400 text-xs font-bold uppercase">أو عبر البريد</span>
+                    <div class="flex-grow border-t border-slate-100"></div>
+                </div>
+
+                <form onsubmit="handleLogin(event)" class="text-right space-y-4">
                     <input type="email" id="login-email" required placeholder="البريد الإلكتروني" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-amber-400">
                     <input type="password" required placeholder="كلمة المرور" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-amber-400">
                     <button type="submit" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition shadow-lg">دخول</button>
@@ -135,9 +148,21 @@
             </div>
         </section>
 
-        <section id="register" class="hidden-section fade-enter flex flex-col items-center justify-center min-h-[70vh]">
+        <section id="register" class="hidden-section fade-enter flex flex-col items-center justify-center min-h-[80vh]">
             <div class="bg-white w-full max-w-sm p-8 rounded-3xl shadow-xl border border-slate-100">
-                <h2 class="text-2xl font-bold text-center text-slate-800 mb-8">حساب جديد</h2>
+                <h2 class="text-2xl font-bold text-center text-slate-800 mb-6">حساب جديد</h2>
+                
+                <button onclick="simulateGoogleLogin()" class="w-full border border-slate-200 bg-white text-slate-700 py-3 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-slate-50 transition mb-6 shadow-sm">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
+                    التسجيل عبر Google
+                </button>
+
+                <div class="relative flex py-2 items-center mb-6">
+                    <div class="flex-grow border-t border-slate-100"></div>
+                    <span class="flex-shrink-0 mx-4 text-slate-400 text-xs font-bold uppercase">أو عبر البريد</span>
+                    <div class="flex-grow border-t border-slate-100"></div>
+                </div>
+
                 <form onsubmit="handleRegister(event)" class="space-y-4">
                     <input type="text" id="reg-name" required placeholder="الاسم الكامل" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-amber-400">
                     <input type="email" id="reg-email" required placeholder="البريد الإلكتروني" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-amber-400">
@@ -160,12 +185,10 @@
                 <input id="s-title" type="text" placeholder="عنوان الخدمة" required class="w-full bg-slate-50 p-4 rounded-xl outline-none focus:ring-2 focus:ring-amber-400">
                 <select id="s-cat" class="w-full bg-slate-50 p-4 rounded-xl outline-none"><option value="صيانة">صيانة</option><option value="تقنية">تقنية</option><option value="تعليم">تعليم</option><option value="نقل">نقل</option></select>
                 <textarea id="s-desc" placeholder="وصف الخدمة..." required class="w-full bg-slate-50 p-4 rounded-xl outline-none h-20"></textarea>
-                
                 <div class="relative">
                     <i class="fa-brands fa-whatsapp absolute left-4 top-4 text-green-500 text-xl"></i>
                     <input id="s-phone" type="tel" placeholder="رقم الواتساب (مثال: 0912345678)" required class="w-full bg-slate-50 p-4 pl-12 rounded-xl outline-none focus:ring-2 focus:ring-green-400">
                 </div>
-
                 <div class="flex gap-3">
                     <input id="s-price" type="number" placeholder="السعر" required class="w-full bg-slate-50 p-4 rounded-xl outline-none">
                     <select id="s-city" class="w-full bg-slate-50 p-4 rounded-xl outline-none"><option>دمشق</option><option>حلب</option><option>اللاذقية</option></select>
@@ -195,7 +218,7 @@
     </div>
 
     <script>
-        // بيانات وهمية مع أرقام هواتف
+        // بيانات وهمية
         const initialServices = [
             { id: 1, title: "مهندس ديكور داخلي", cat: "تقنية", desc: "تصميم وتنفيذ ديكورات عصرية.", price: 500000, city: "دمشق", user: "مكتب العمران", phone: "963911111111" },
             { id: 2, title: "صيانة طاقة شمسية", cat: "صيانة", desc: "فحص وبرمجة الانفيرترات.", price: 75000, city: "حلب", user: "الفني أحمد", phone: "963922222222" },
@@ -233,13 +256,10 @@
             renderServices();
         }
 
-        // دالة فتح واتساب (النصيحة الذهبية) 💡
         function openWhatsApp(phone, title) {
-            // تنظيف الرقم وإزالة الصفر في البداية إن وجد وإضافة كود سوريا
-            let cleanPhone = phone.replace(/\D/g, ''); // إزالة أي رموز
+            let cleanPhone = phone.replace(/\D/g, ''); 
             if(cleanPhone.startsWith('0')) cleanPhone = cleanPhone.substring(1);
             if(!cleanPhone.startsWith('963')) cleanPhone = '963' + cleanPhone;
-
             const msg = `مرحباً، رأيت إعلانك "${title}" على منصة سند وأرغب بالاستفسار.`;
             const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
@@ -304,6 +324,14 @@
                     <button onclick="openWhatsApp('${r.phone}', 'طلبك: ${r.title}')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold">مساعدة</button>
                 </div>
             `).join('');
+        }
+
+        // محاكاة تسجيل دخول جوجل (لأننا لا نملك سيرفر)
+        function simulateGoogleLogin() {
+            // نقوم بتسجيل دخول وهمي مباشرة
+            currentUser = { name: "مستخدم جوجل", email: "google_user@gmail.com" };
+            saveUser(); updateUI(); navigate('home');
+            alert("تم تسجيل الدخول بنجاح عبر حساب Google!");
         }
 
         function handleLogin(e) {
