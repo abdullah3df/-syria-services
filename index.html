@@ -4,520 +4,444 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>منصة خِدمة سوريا | سوق المهن والخدمات</title>
-    <meta name="description" content="أكبر منصة خدمات في سوريا. ابحث عن كهربائي، نجار، مبرمج، أو مدرس في دمشق، حلب، اللاذقية وجميع المحافظات. سجل الآن واعرض خدماتك مجاناً.">
-    <meta name="keywords" content="خدمات سوريا, وظائف حرة, صيانة منازل دمشق, كهربائي حلب, نجار اللاذقية, سوق المهن سوريا, عمل حر, تسويق خدمات, تطبيقات سورية">
-    <meta name="author" content="منصة خِدمة">
+    <title>سَنَد | خدمات احترافية</title>
+    <meta name="description" content="منصة سند: المعيار الذهبي للخدمات في سوريا.">
     
-    <meta property="og:title" content="منصة خِدمة - سوق الخدمات الحرة في سوريا">
-    <meta property="og:description" content="هل تبحث عن فني أو معلم صنعة؟ أو لديك مهنة تريد العمل بها؟ سجل الآن في منصة خدمة السورية.">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="ar_SY">
-
-    <meta name="theme-color" content="#4f46e5">
-    <meta name="msapplication-navbutton-color" content="#4f46e5">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1e293b">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="خِدمة">
-    <meta name="apple-mobile-web-app-title" content="خِدمة">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/1067/1067566.png">
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1067/1067566.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+        /* التنسيقات العامة */
+        body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; color: #1e293b; -webkit-tap-highlight-color: transparent; }
         
-        /* إخفاء وإظهار الأقسام */
+        /* إخفاء السكرول بار المزعج مع الحفاظ على الوظيفة */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        
+        /* تأثيرات الانتقال الناعمة جداً */
+        .fade-enter { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
         .hidden-section { display: none !important; }
-        .fade-enter { animation: fadeIn 0.4s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* تأثير الخلفية المتحركة (Blob) لصفحة الدخول */
-        .blob-cont { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
-        .blob { position: absolute; border-radius: 50%; filter: blur(40px); opacity: 0.4; animation: fly 10s infinite alternate; }
-        .blob-1 { top: -10%; right: -10%; width: 300px; height: 300px; background: #6366f1; animation-delay: 0s; }
-        .blob-2 { bottom: -10%; left: -10%; width: 300px; height: 300px; background: #a855f7; animation-delay: 2s; }
-        @keyframes fly { from { transform: translate(0,0) scale(1); } to { transform: translate(20px, -20px) scale(1.1); } }
+        /* تصميم الكروت الزجاجية (Glass Effect) */
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); }
         
-        /* تحسين شكل السكرول بار */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #c7c7c7; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+        /* شريط التنقل السفلي */
+        .nav-icon { transition: all 0.3s ease; }
+        .nav-active i { color: #d97706; transform: translateY(-2px); }
+        .nav-active span { color: #d97706; font-weight: bold; }
+        
+        /* الزر العائم */
+        .floating-btn { box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.5); }
     </style>
 </head>
-<body class="text-gray-800 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen pb-20 md:pb-0">
 
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-2 cursor-pointer select-none" onclick="navigate('home')">
-                <div class="bg-indigo-600 text-white p-2 rounded-lg shadow-sm">
-                    <i class="fa-solid fa-handshake fa-lg"></i>
+    <nav class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
+                <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
                 </div>
-                <h1 class="text-2xl font-bold text-gray-800 tracking-wide">خِدمة <span class="text-xs text-white bg-red-600 px-1.5 py-0.5 rounded-sm align-middle shadow-sm">SY</span></h1>
-            </div>
-
-            <div class="hidden md:flex gap-8 font-medium text-gray-600">
-                <button onclick="navigate('home')" class="hover:text-indigo-600 transition">الرئيسية</button>
-                <button onclick="navigate('services')" class="hover:text-indigo-600 transition">تصفح الخدمات</button>
-                <button onclick="navigate('requests')" class="hover:text-indigo-600 transition">طلبات الناس</button>
-            </div>
-
-            <div id="guest-nav">
-                <button onclick="navigate('login')" class="text-indigo-600 font-bold ml-4 hover:bg-indigo-50 px-3 py-1 rounded transition">دخول</button>
-                <button onclick="navigate('register')" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-bold hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">حساب جديد</button>
-            </div>
-
-            <div id="user-nav" class="hidden flex items-center gap-4">
-                <div class="text-right hidden sm:block">
-                    <p class="text-xs text-gray-500">أهلاً بك</p>
-                    <p class="font-bold text-indigo-700 text-sm" id="nav-username">اسم المستخدم</p>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-wider">سَنَد</h1>
                 </div>
-                <button onclick="logout()" class="text-red-500 hover:bg-red-50 p-2 rounded-full transition" title="تسجيل خروج">
-                    <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-                </button>
+            </div>
+
+            <div class="hidden md:flex gap-10 text-slate-300 font-medium text-sm">
+                <button onclick="navigate('home')" class="hover:text-amber-400 transition">الرئيسية</button>
+                <button onclick="navigate('services')" class="hover:text-amber-400 transition">الخدمات</button>
+                <button onclick="navigate('requests')" class="hover:text-amber-400 transition">الطلبات</button>
+            </div>
+
+            <div class="hidden md:block">
+                <button onclick="navigate('login')" id="desktop-auth-btn" class="border border-slate-600 px-6 py-2 rounded-full hover:bg-slate-800 transition text-sm">تسجيل الدخول</button>
             </div>
         </div>
     </nav>
 
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.1)] z-40 flex justify-around py-3 border-t">
-        <button onclick="navigate('home')" class="flex flex-col items-center text-gray-500 hover:text-indigo-600">
-            <i class="fa-solid fa-house text-xl mb-1"></i><span class="text-xs">الرئيسية</span>
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-[0_-5px_20px_rgba(0,0,0,0.05)] z-50 px-6 py-3 border-t border-slate-100 flex justify-between items-end h-[70px]">
+        
+        <button onclick="navigate('home')" class="nav-btn w-12 flex flex-col items-center gap-1 text-slate-400" id="nav-home">
+            <i class="fa-solid fa-house text-xl"></i>
+            <span class="text-[10px]">الرئيسية</span>
         </button>
-        <button onclick="navigate('services')" class="flex flex-col items-center text-gray-500 hover:text-indigo-600">
-            <i class="fa-solid fa-layer-group text-xl mb-1"></i><span class="text-xs">الخدمات</span>
+
+        <button onclick="navigate('services')" class="nav-btn w-12 flex flex-col items-center gap-1 text-slate-400" id="nav-services">
+            <i class="fa-solid fa-briefcase text-xl"></i>
+            <span class="text-[10px]">خدمات</span>
         </button>
-        <button onclick="checkAuthAndAction('addService')" class="flex flex-col items-center text-indigo-600 -mt-8">
-            <div class="bg-indigo-600 text-white p-3 rounded-full shadow-lg border-4 border-gray-50">
-                <i class="fa-solid fa-plus text-xl"></i>
-            </div>
+
+        <div class="relative -top-6">
+            <button onclick="checkAuthAndAction('addService')" class="floating-btn w-14 h-14 bg-slate-900 rounded-full flex items-center justify-center text-amber-400 text-2xl border-4 border-slate-50 transform hover:scale-105 transition">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+
+        <button onclick="navigate('requests')" class="nav-btn w-12 flex flex-col items-center gap-1 text-slate-400" id="nav-requests">
+            <i class="fa-solid fa-comment-dots text-xl"></i>
+            <span class="text-[10px]">طلبات</span>
         </button>
-        <button onclick="navigate('requests')" class="flex flex-col items-center text-gray-500 hover:text-indigo-600">
-            <i class="fa-solid fa-bullhorn text-xl mb-1"></i><span class="text-xs">الطلبات</span>
-        </button>
-        <button onclick="navigate('login')" id="mobile-login-btn" class="flex flex-col items-center text-gray-500 hover:text-indigo-600">
-            <i class="fa-solid fa-user text-xl mb-1"></i><span class="text-xs">حسابي</span>
+
+        <button onclick="navigate('login')" class="nav-btn w-12 flex flex-col items-center gap-1 text-slate-400" id="nav-profile">
+            <i class="fa-regular fa-user text-xl"></i>
+            <span class="text-[10px]">حسابي</span>
         </button>
     </div>
 
-    <main id="app-container" class="flex-grow container mx-auto px-4 py-8 mb-16 md:mb-0">
+    <main id="app-container" class="flex-grow container mx-auto px-4 py-6">
         
         <section id="home" class="fade-enter block">
-            <div class="bg-gradient-to-r from-indigo-800 to-indigo-600 rounded-3xl p-8 md:p-16 text-white text-center shadow-2xl relative overflow-hidden mb-12">
+            <div class="bg-slate-900 rounded-3xl p-8 md:p-12 text-white text-center relative overflow-hidden mb-10 shadow-2xl">
+                <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                
                 <div class="relative z-10">
-                    <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">سوق الخدمات السوري<br>بين يديك</h2>
-                    <p class="text-indigo-100 text-lg mb-8 max-w-2xl mx-auto">من دمشق إلى حلب، ومن الساحل إلى الجزيرة. منصة تجمع أمهر الحرفيين والمهنيين السوريين مع العملاء.</p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <button onclick="navigate('services')" class="bg-white text-indigo-700 px-8 py-3 rounded-xl font-bold hover:bg-gray-100 transition shadow-lg">ابحث عن مهني</button>
-                        <button onclick="checkAuthAndAction('addService')" class="bg-orange-500 text-white px-8 py-3 rounded-xl font-bold hover:bg-orange-600 transition shadow-lg">انشر مهنتك مجاناً</button>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">الاحترافية تبدأ من هنا</h2>
+                    <p class="text-slate-400 text-base md:text-lg mb-8 max-w-xl mx-auto font-light">منصة "سَنَد" تجمع نخبة المهنيين في سوريا. جودة، سرعة، وضمان.</p>
+                    
+                    <div class="flex justify-center gap-4">
+                        <button onclick="navigate('services')" class="bg-amber-500 text-slate-900 px-8 py-3 rounded-xl font-bold hover:bg-amber-400 transition shadow-lg shadow-amber-500/20">تصفح الخدمات</button>
                     </div>
                 </div>
-                <i class="fa-solid fa-map-location-dot absolute -bottom-10 -right-10 text-9xl text-white opacity-10"></i>
-                <i class="fa-solid fa-screwdriver-wrench absolute top-5 -left-10 text-8xl text-white opacity-10"></i>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                <div onclick="quickFilter('صيانة')" class="cursor-pointer bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition text-center hover:-translate-y-1">
-                    <i class="fa-solid fa-screwdriver text-indigo-500 text-3xl mb-3"></i><h3 class="font-bold">صيانة وحرف</h3>
+            <div class="flex items-center justify-between mb-6 px-2">
+                <h3 class="text-xl font-bold text-slate-800">الأقسام الرئيسية</h3>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div onclick="filterCat('صيانة')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition text-center cursor-pointer group">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-screwdriver-wrench text-lg"></i>
+                    </div>
+                    <span class="font-bold text-slate-700 text-sm">صيانة</span>
                 </div>
-                <div onclick="quickFilter('تقنية')" class="cursor-pointer bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition text-center hover:-translate-y-1">
-                    <i class="fa-solid fa-laptop-code text-purple-500 text-3xl mb-3"></i><h3 class="font-bold">تقنية وتصميم</h3>
+                <div onclick="filterCat('تقنية')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition text-center cursor-pointer group">
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-laptop-code text-lg"></i>
+                    </div>
+                    <span class="font-bold text-slate-700 text-sm">تقنية</span>
                 </div>
-                <div onclick="quickFilter('تعليم')" class="cursor-pointer bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition text-center hover:-translate-y-1">
-                    <i class="fa-solid fa-graduation-cap text-green-500 text-3xl mb-3"></i><h3 class="font-bold">تعليم وتدريب</h3>
+                <div onclick="filterCat('تعليم')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition text-center cursor-pointer group">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-graduation-cap text-lg"></i>
+                    </div>
+                    <span class="font-bold text-slate-700 text-sm">تعليم</span>
                 </div>
-                <div onclick="quickFilter('نقل')" class="cursor-pointer bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition text-center hover:-translate-y-1">
-                    <i class="fa-solid fa-truck text-orange-500 text-3xl mb-3"></i><h3 class="font-bold">نقل وشحن</h3>
+                <div onclick="filterCat('نقل')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition text-center cursor-pointer group">
+                    <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-orange-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-truck text-lg"></i>
+                    </div>
+                    <span class="font-bold text-slate-700 text-sm">نقل</span>
                 </div>
             </div>
 
-            <div class="flex justify-between items-end mb-6">
-                <h3 class="text-2xl font-bold border-r-4 border-indigo-500 pr-3">أحدث الخدمات المضافة</h3>
-                <button onclick="navigate('services')" class="text-indigo-600 font-bold text-sm hover:underline">عرض الكل</button>
+            <div class="flex items-center justify-between mb-6 px-2">
+                <h3 class="text-xl font-bold text-slate-800">خدمات مميزة</h3>
+                <button onclick="navigate('services')" class="text-amber-600 text-sm font-bold">عرض الكل</button>
             </div>
-            <div id="home-services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            
+            <div id="home-services-list" class="space-y-4"></div>
         </section>
 
         <section id="services" class="hidden-section fade-enter">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-                <h2 class="text-3xl font-bold text-gray-800">الخدمات المتاحة</h2>
-                <div class="flex gap-2 w-full md:w-auto flex-wrap">
-                    <input type="text" id="search-input" onkeyup="renderServices()" placeholder="بحث (مثال: نجار، دمشق...)" class="border border-gray-300 px-4 py-2 rounded-lg flex-grow focus:outline-none focus:border-indigo-500">
-                    <select id="cat-filter" onchange="renderServices()" class="border border-gray-300 px-4 py-2 rounded-lg bg-white">
-                        <option value="all">كل الأقسام</option>
-                        <option value="صيانة">صيانة وحرف</option>
-                        <option value="تقنية">تقنية وبرمجة</option>
-                        <option value="تعليم">تعليم وتدريب</option>
-                        <option value="نقل">نقل وشحن</option>
-                        <option value="أخرى">أخرى</option>
-                    </select>
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 mb-6 sticky top-20 z-30">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute right-4 top-3.5 text-slate-400"></i>
+                    <input type="text" id="search-input" onkeyup="renderServices()" placeholder="ابحث عن خدمة..." class="w-full bg-slate-50 border-none rounded-xl py-3 pr-10 pl-4 focus:ring-2 focus:ring-amber-400 outline-none text-sm font-medium">
                 </div>
-                <button onclick="checkAuthAndAction('addService')" class="hidden md:flex bg-indigo-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-indigo-700 shadow-md items-center gap-2">
-                    <i class="fa-solid fa-plus"></i> أضف خدمة
-                </button>
             </div>
-            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12"></div>
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </section>
 
         <section id="requests" class="hidden-section fade-enter">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-                <div>
-                    <h2 class="text-3xl font-bold text-gray-800">طلبات الأهالي</h2>
-                    <p class="text-gray-500 mt-1">ساعد الناس في منطقتك وقدم عروضك.</p>
-                </div>
-                <button onclick="checkAuthAndAction('addRequest')" class="bg-orange-500 text-white px-6 py-2 rounded-lg font-bold hover:bg-orange-600 shadow-md flex items-center gap-2">
-                    <i class="fa-solid fa-bullhorn"></i> اطلب خدمة
+            <div class="flex justify-between items-center mb-6 px-2">
+                <h2 class="text-2xl font-bold text-slate-800">طلبات العملاء</h2>
+                <button onclick="checkAuthAndAction('addRequest')" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-md hover:bg-slate-800">
+                    <i class="fa-solid fa-plus ml-2"></i>طلب جديد
                 </button>
             </div>
-            <div id="requests-list" class="space-y-4 pb-12"></div>
+            <div id="requests-list" class="space-y-4"></div>
         </section>
 
-        <section id="login" class="hidden-section fade-enter relative min-h-[600px] flex items-center justify-center">
-            <div class="blob-cont">
-                <div class="blob blob-1"></div>
-                <div class="blob blob-2"></div>
-            </div>
-            
-            <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-md overflow-hidden relative z-10 border border-white/50">
-                <div class="bg-indigo-600 p-8 text-center">
-                    <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg text-indigo-600 text-2xl">
-                        <i class="fa-solid fa-user-lock"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-white mb-1">مرحباً بعودتك</h2>
-                    <p class="text-indigo-200 text-sm">سجل دخولك للمتابعة</p>
+        <section id="login" class="hidden-section fade-enter flex flex-col items-center justify-center min-h-[60vh]">
+            <div class="bg-white w-full max-w-sm p-8 rounded-3xl shadow-xl border border-slate-100 text-center">
+                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-800 text-2xl">
+                    <i class="fa-solid fa-user-lock"></i>
                 </div>
-                <div class="p-8">
-                    <form onsubmit="handleLogin(event)">
-                        <div class="mb-5">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">البريد الإلكتروني</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400"><i class="fa-solid fa-envelope"></i></div>
-                                <input type="email" id="login-email" required class="w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="example@mail.com">
-                            </div>
-                        </div>
-                        <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">كلمة المرور</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400"><i class="fa-solid fa-lock"></i></div>
-                                <input type="password" id="login-pass" required class="w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="••••••••">
-                            </div>
-                        </div>
-                        <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition shadow-lg transform hover:-translate-y-0.5">تسجيل الدخول</button>
-                    </form>
-                    <p class="mt-6 text-center text-sm text-gray-600">
-                        ليس لديك حساب؟ <button onclick="navigate('register')" class="font-bold text-indigo-600 hover:text-indigo-800">أنشئ حساباً جديداً</button>
-                    </p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="register" class="hidden-section fade-enter relative min-h-[600px] flex items-center justify-center">
-            <div class="blob-cont">
-                <div class="blob blob-2" style="top:-10%; right:-10%;"></div>
-                <div class="blob blob-1" style="bottom:-10%; left:-10%;"></div>
-            </div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">مرحباً بك</h2>
+                <p class="text-slate-400 text-sm mb-8">سجل دخولك للمتابعة</p>
 
-            <div class="bg-white/80 backdrop-blur-md max-w-md w-full p-8 rounded-2xl shadow-xl border border-white/50 z-10">
-                <h2 class="text-2xl font-bold text-center mb-6 text-indigo-900">إنشاء حساب جديد</h2>
-                <form onsubmit="handleRegister(event)">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2">الاسم الكامل</label>
-                        <input type="text" id="reg-name" required class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                <form onsubmit="handleLogin(event)" class="text-right space-y-4">
+                    <div>
+                        <input type="email" id="login-email" required placeholder="البريد الإلكتروني" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:border-amber-400 focus:ring-0 outline-none transition">
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2">البريد الإلكتروني</label>
-                        <input type="email" id="reg-email" required class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
+                    <div>
+                        <input type="password" required placeholder="كلمة المرور" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:border-amber-400 focus:ring-0 outline-none transition">
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 font-medium mb-2">المحافظة</label>
-                        <select id="reg-city" class="w-full border border-gray-300 p-3 rounded-lg bg-white">
-                            <option>دمشق</option><option>ريف دمشق</option><option>حلب</option><option>اللاذقية</option><option>حمص</option><option>طرطوس</option><option>حماة</option><option>درعا</option><option>السويداء</option><option>القنيطرة</option><option>دير الزور</option><option>الحسكة</option><option>إدلب</option><option>الرقة</option>
-                        </select>
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-gray-700 font-medium mb-2">كلمة المرور</label>
-                        <input type="password" id="reg-pass" required class="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
-                    </div>
-                    <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition shadow-lg">تسجيل</button>
+                    <button type="submit" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-slate-800 transition shadow-lg">دخول</button>
                 </form>
-                <p class="text-center mt-4 text-sm text-gray-600">
-                    لديك حساب بالفعل؟ <button onclick="navigate('login')" class="text-indigo-600 font-bold hover:underline">دخول</button>
-                </p>
+                
+                <div class="mt-6 text-sm text-slate-500">
+                    جديد معنا؟ <button onclick="navigate('register')" class="text-amber-600 font-bold hover:underline">إنشاء حساب</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="register" class="hidden-section fade-enter flex flex-col items-center justify-center min-h-[70vh]">
+            <div class="bg-white w-full max-w-sm p-8 rounded-3xl shadow-xl border border-slate-100">
+                <h2 class="text-2xl font-bold text-center text-slate-800 mb-8">عضوية جديدة</h2>
+                <form onsubmit="handleRegister(event)" class="space-y-4">
+                    <input type="text" id="reg-name" required placeholder="الاسم الكامل" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:border-amber-400 outline-none">
+                    <input type="email" id="reg-email" required placeholder="البريد الإلكتروني" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:border-amber-400 outline-none">
+                    <select class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:border-amber-400 outline-none text-slate-500">
+                        <option>دمشق</option><option>حلب</option><option>اللاذقية</option><option>حمص</option>
+                    </select>
+                    <input type="password" required placeholder="كلمة المرور" class="w-full bg-slate-50 border-slate-200 rounded-xl px-4 py-3 focus:border-amber-400 outline-none">
+                    <button type="submit" class="w-full bg-amber-500 text-slate-900 py-3 rounded-xl font-bold hover:bg-amber-400 transition shadow-lg">تسجيل</button>
+                </form>
+                <div class="mt-4 text-center text-sm">
+                    <button onclick="navigate('login')" class="text-slate-400 hover:text-slate-600">العودة لتسجيل الدخول</button>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <div id="modal-service" class="fixed inset-0 bg-black bg-opacity-60 hidden z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 animate-scale max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">نشر خدمة جديدة</h3>
-                <button onclick="closeModal('modal-service')" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark fa-xl"></i></button>
+    <div id="modal-service" class="fixed inset-0 bg-slate-900/60 hidden z-[60] flex items-end md:items-center justify-center backdrop-blur-sm">
+        <div class="bg-white w-full md:max-w-md rounded-t-3xl md:rounded-3xl p-6 animate-[fadeInUp_0.3s_ease-out]">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-bold">إضافة خدمة</h3>
+                <button onclick="closeModal('modal-service')" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center"><i class="fa-solid fa-times"></i></button>
             </div>
-            <form onsubmit="submitService(event)">
-                <input type="text" id="s-title" placeholder="عنوان الخدمة (مثال: صيانة مولدات)" class="w-full border p-3 rounded-lg mb-3 focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                <select id="s-cat" class="w-full border p-3 rounded-lg mb-3 bg-white">
-                    <option value="صيانة">صيانة وحرف</option>
-                    <option value="تقنية">تقنية وبرمجة</option>
-                    <option value="تعليم">تعليم وتدريب</option>
-                    <option value="نقل">نقل وشحن</option>
-                    <option value="أخرى">أخرى</option>
+            <form onsubmit="submitService(event)" class="space-y-4">
+                <input id="s-title" type="text" placeholder="ما هي خدمتك؟" class="w-full bg-slate-50 p-4 rounded-xl outline-none focus:ring-2 focus:ring-amber-400">
+                <select id="s-cat" class="w-full bg-slate-50 p-4 rounded-xl outline-none">
+                    <option value="صيانة">صيانة</option><option value="تقنية">تقنية</option><option value="تعليم">تعليم</option><option value="نقل">نقل</option>
                 </select>
-                <textarea id="s-desc" placeholder="وصف الخدمة بالتفصيل..." class="w-full border p-3 rounded-lg mb-3 h-24 focus:ring-2 focus:ring-indigo-500 outline-none" required></textarea>
-                <div class="flex gap-3 mb-4">
-                    <input type="number" id="s-price" placeholder="السعر (ل.س)" class="w-1/2 border p-3 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none" required>
-                    <select id="s-city" class="w-1/2 border p-3 rounded-lg bg-white">
-                        <option>دمشق</option><option>ريف دمشق</option><option>حلب</option><option>اللاذقية</option><option>حمص</option><option>طرطوس</option><option>حماة</option><option>درعا</option><option>السويداء</option>
-                    </select>
+                <textarea id="s-desc" placeholder="وصف مختصر..." class="w-full bg-slate-50 p-4 rounded-xl outline-none h-24"></textarea>
+                <div class="flex gap-4">
+                    <input id="s-price" type="number" placeholder="السعر" class="w-full bg-slate-50 p-4 rounded-xl outline-none">
+                    <select id="s-city" class="w-full bg-slate-50 p-4 rounded-xl outline-none"><option>دمشق</option><option>حلب</option></select>
                 </div>
-                <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-bold hover:bg-indigo-700">نشر الخدمة</button>
+                <button class="w-full bg-slate-900 text-white p-4 rounded-xl font-bold">نشر الآن</button>
             </form>
         </div>
     </div>
 
-    <div id="modal-request" class="fixed inset-0 bg-black bg-opacity-60 hidden z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">طلب خدمة</h3>
-                <button onclick="closeModal('modal-request')" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-xmark fa-xl"></i></button>
+    <div id="modal-request" class="fixed inset-0 bg-slate-900/60 hidden z-[60] flex items-end md:items-center justify-center backdrop-blur-sm">
+        <div class="bg-white w-full md:max-w-md rounded-t-3xl md:rounded-3xl p-6 animate-[fadeInUp_0.3s_ease-out]">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-bold">اطلب مساعدة</h3>
+                <button onclick="closeModal('modal-request')" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center"><i class="fa-solid fa-times"></i></button>
             </div>
-            <form onsubmit="submitRequest(event)">
-                <input type="text" id="r-title" placeholder="ما هي المشكلة؟ (مثال: عطل في الغسالة)" class="w-full border p-3 rounded-lg mb-3 focus:ring-2 focus:ring-orange-500 outline-none" required>
-                <textarea id="r-desc" placeholder="اشرح المشكلة بدقة..." class="w-full border p-3 rounded-lg mb-3 h-24 focus:ring-2 focus:ring-orange-500 outline-none" required></textarea>
-                <select id="r-city" class="w-full border p-3 rounded-lg mb-4 bg-white">
-                     <option>دمشق</option><option>ريف دمشق</option><option>حلب</option><option>اللاذقية</option><option>حمص</option><option>طرطوس</option><option>حماة</option><option>درعا</option><option>السويداء</option>
-                </select>
-                <button type="submit" class="w-full bg-orange-500 text-white py-3 rounded-lg font-bold hover:bg-orange-600">نشر الطلب</button>
+            <form onsubmit="submitRequest(event)" class="space-y-4">
+                <input id="r-title" type="text" placeholder="ما هي المشكلة؟" class="w-full bg-slate-50 p-4 rounded-xl outline-none focus:ring-2 focus:ring-amber-400">
+                <textarea id="r-desc" placeholder="التفاصيل..." class="w-full bg-slate-50 p-4 rounded-xl outline-none h-24"></textarea>
+                <select id="r-city" class="w-full bg-slate-50 p-4 rounded-xl outline-none"><option>دمشق</option><option>حلب</option></select>
+                <button class="w-full bg-amber-500 text-slate-900 p-4 rounded-xl font-bold">إرسال الطلب</button>
             </form>
         </div>
     </div>
-
-    <footer class="bg-gray-800 text-gray-400 py-6 text-center mt-auto hidden md:block">
-        <p class="mb-2">© 2025 منصة خِدمة - سوريا.</p>
-        <div class="text-sm">
-            <a href="#" class="hover:text-white mx-2">شروط الاستخدام</a> |
-            <a href="#" class="hover:text-white mx-2">سياسة الخصوصية</a>
-        </div>
-    </footer>
 
     <script>
-        // بيانات أولية (وهمية) للبدء
+        // بيانات وهمية
         const initialServices = [
-            { id: 1, title: "فني كهربائي منازل (انفيرترات)", cat: "صيانة", desc: "تركيب وصيانة منظومات الطاقة الشمسية والانفيرترات بأسعار منافسة.", price: 75000, city: "دمشق", user: "أبو يامن", date: "2024-02-01" },
-            { id: 2, title: "تصميم غرافيك ومواقع", cat: "تقنية", desc: "تصميم شعارات وهوية بصرية للشركات الناشئة.", price: 350000, city: "اللاذقية", user: "مايا ديزاين", date: "2024-02-02" },
-            { id: 3, title: "نقل عفش مع الفك والتركيب", cat: "نقل", desc: "سيارة مغلقة لنقل الأثاث ضمن المحافظة مع عمال مختصين.", price: 250000, city: "حلب", user: "مكتب الأمانة", date: "2024-02-03" },
-            { id: 4, title: "مدرس رياضيات (ثانوي)", cat: "تعليم", desc: "دروس خصوصية ومكثفات لطلاب الشهادة الثانوية.", price: 30000, city: "حمص", user: "الأستاذ سامر", date: "2024-02-04" },
-            { id: 5, title: "صيانة موبايلات (هاردوير)", cat: "صيانة", desc: "تبديل شاشات وبطاريات لجميع أنواع الأجهزة.", price: 40000, city: "طرطوس", user: "مركز التكنولوجيا", date: "2024-02-05" }
+            { id: 1, title: "مهندس ديكور داخلي", cat: "تقنية", desc: "تصميم وتنفيذ ديكورات عصرية للمنازل والمكاتب.", price: 500000, city: "دمشق", user: "مكتب العمران" },
+            { id: 2, title: "صيانة طاقة شمسية", cat: "صيانة", desc: "فحص وبرمجة الانفيرترات وتبديل البطاريات.", price: 75000, city: "حلب", user: "الفني أحمد" },
+            { id: 3, title: "دروس بيانو", cat: "تعليم", desc: "تعليم عزف بيانو للمبتدئين في المنزل.", price: 40000, city: "اللاذقية", user: "سارة للموسيقا" },
         ];
-
         const initialRequests = [
-            { id: 1, title: "مطلوب صهريج مياه", desc: "بشكل عاجل لمنطقة المزة فيلات، مياه صالحة للشرب.", city: "دمشق", user: "فادي", status: "عاجل" },
-            { id: 2, title: "صيانة براد الحافظ", desc: "البراد لا يبرد والفريزر يعمل بشكل جيد.", city: "ريف دمشق", user: "أم علي", status: "جديد" },
+            { id: 1, title: "مطلوب ونش إنقاذ", desc: "سيارة معطلة في اوتستراد المزة.", city: "دمشق", user: "طارق" },
         ];
 
-        // تهيئة المتغيرات من التخزين المحلي
-        let services = JSON.parse(localStorage.getItem('sy_services')) || initialServices;
-        let requests = JSON.parse(localStorage.getItem('sy_requests')) || initialRequests;
-        let currentUser = JSON.parse(localStorage.getItem('sy_currentUser')) || null;
+        let services = JSON.parse(localStorage.getItem('services')) || initialServices;
+        let requests = JSON.parse(localStorage.getItem('requests')) || initialRequests;
+        let currentUser = JSON.parse(localStorage.getItem('user')) || null;
+        let currentFilter = 'all';
 
         function init() {
-            updateAuthUI();
-            renderServices();
-            renderRequests();
+            updateUI();
             navigate('home');
         }
 
-        // --- نظام التوجيه (Routing) ---
+        // التنقل
         function navigate(pageId) {
+            // إخفاء الكل
             document.querySelectorAll('main section').forEach(el => el.classList.add('hidden-section'));
-            document.querySelectorAll('main section').forEach(el => el.classList.remove('block'));
+            // إظهار المطلوب
             const target = document.getElementById(pageId);
             if(target) {
                 target.classList.remove('hidden-section');
                 target.classList.add('block');
             }
             window.scrollTo(0,0);
-            
-            // تحديث حالة الأزرار في الجوال
-            if (window.innerWidth < 768) {
-               // يمكن إضافة كود لتلوين الأزرار النشطة هنا
+            updateNavState(pageId);
+        }
+
+        // تحديث حالة الأزرار في الأسفل
+        function updateNavState(pageId) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-active'));
+            const activeBtn = document.getElementById('nav-' + pageId);
+            // إذا كانت الصفحة بروفايل أو لوجين نعتبرها بروفايل
+            if(pageId === 'login' || pageId === 'register') {
+                document.getElementById('nav-profile').classList.add('nav-active');
+            } else if (activeBtn) {
+                activeBtn.classList.add('nav-active');
             }
         }
 
-        function quickFilter(category) {
-            document.getElementById('cat-filter').value = category;
-            renderServices();
+        // فلترة الخدمات
+        function filterCat(cat) {
+            currentFilter = cat;
+            document.getElementById('search-input').value = cat; // مجرد توضيح للمستخدم
             navigate('services');
+            renderServices();
         }
 
-        // --- عرض الخدمات ---
+        // عرض الخدمات
         function renderServices() {
             const container = document.getElementById('services-grid');
-            const homeContainer = document.getElementById('home-services-grid');
+            const homeList = document.getElementById('home-services-list');
+            const search = document.getElementById('search-input')?.value.toLowerCase() || "";
             
-            const keyword = document.getElementById('search-input')?.value.toLowerCase() || "";
-            const category = document.getElementById('cat-filter')?.value || "all";
+            // إذا كان البحث فارغاً نستخدم الفلتر الحالي، وإلا نلغي الفلتر ونبحث بالكلمة
+            const isSearchMode = search.length > 0;
+            const filterToUse = isSearchMode ? 'all' : currentFilter;
 
             const filtered = services.filter(s => {
-                const matchKey = s.title.toLowerCase().includes(keyword) || s.desc.toLowerCase().includes(keyword) || s.city.includes(keyword);
-                const matchCat = category === "all" || s.cat === category;
-                return matchKey && matchCat;
+                const matchSearch = s.title.toLowerCase().includes(search) || s.cat.includes(search);
+                const matchCat = filterToUse === 'all' || s.cat === currentFilter;
+                return matchSearch && matchCat;
             });
 
-            const html = filtered.map(s => `
-                <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition border border-gray-100 overflow-hidden flex flex-col group">
-                    <div class="h-32 bg-gray-200 relative flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-200 group-hover:from-indigo-50 group-hover:to-indigo-100 transition">
-                        <i class="fa-solid fa-briefcase text-4xl text-gray-300 group-hover:text-indigo-300 transition"></i>
-                        <span class="absolute top-3 left-3 bg-white px-2 py-1 rounded text-xs font-bold text-gray-600 shadow-sm">${s.city}</span>
-                        <span class="absolute top-3 right-3 bg-indigo-600 text-white px-2 py-1 rounded text-xs font-bold">${s.cat}</span>
-                    </div>
-                    <div class="p-5 flex-grow">
-                        <h3 class="font-bold text-lg mb-2 text-gray-800">${s.title}</h3>
-                        <p class="text-gray-500 text-sm line-clamp-2 mb-4">${s.desc}</p>
-                        <div class="flex items-center gap-2 text-sm text-gray-400">
-                            <i class="fa-solid fa-user-circle"></i> ${s.user}
+            // HTML للخدمة
+            const createCard = (s) => `
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 hover:shadow-md transition group">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="bg-slate-50 p-3 rounded-xl text-slate-500 group-hover:bg-amber-50 group-hover:text-amber-600 transition">
+                            <i class="fa-solid fa-bookmark"></i>
                         </div>
+                        <span class="text-xs font-bold bg-slate-100 px-2 py-1 rounded text-slate-600">${s.city}</span>
                     </div>
-                    <div class="p-4 border-t border-gray-100 flex justify-between items-center bg-gray-50">
-                        <span class="text-green-700 font-bold text-lg" dir="ltr">${s.price.toLocaleString()} ل.س</span>
-                        <button onclick="alert('للتواصل مع: ${s.user}\\nالرقم: 09xx xxx xxx')" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-indigo-700">تواصل</button>
+                    <h4 class="font-bold text-lg text-slate-800 mb-1">${s.title}</h4>
+                    <p class="text-slate-500 text-sm mb-4 line-clamp-2">${s.desc}</p>
+                    <div class="flex justify-between items-center border-t border-slate-50 pt-3">
+                        <span class="font-bold text-emerald-600" dir="ltr">${s.price.toLocaleString()} ل.س</span>
+                        <button onclick="alert('تواصل مع ${s.user}')" class="text-slate-900 text-sm font-bold hover:text-amber-600">تواصل</button>
                     </div>
                 </div>
-            `).join('');
+            `;
 
-            if(container) container.innerHTML = html || '<div class="col-span-3 text-center text-gray-500 py-8">لا توجد خدمات مطابقة للبحث</div>';
+            if(container) container.innerHTML = filtered.map(createCard).join('');
             
-            if(homeContainer) {
-                homeContainer.innerHTML = filtered.slice(0, 3).map(s => `
-                    <div class="bg-white p-4 rounded-xl shadow border border-gray-100 flex flex-col justify-between h-full">
-                        <div>
-                            <h4 class="font-bold text-lg text-gray-800 mb-1">${s.title}</h4>
-                            <p class="text-xs text-gray-500 mb-2 line-clamp-1">${s.desc}</p>
+            // قائمة الصفحة الرئيسية (نعرض آخر 3 فقط)
+            if(homeList) {
+                homeList.innerHTML = filtered.slice(0, 3).map(s => `
+                    <div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-50">
+                        <div class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center text-amber-600 font-bold text-lg">
+                            ${s.title[0]}
                         </div>
-                        <div class="flex justify-between items-center mt-2 border-t pt-2">
-                            <span class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-600">${s.city}</span>
-                            <span class="text-green-700 font-bold text-sm" dir="ltr">${s.price.toLocaleString()} ل.س</span>
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-slate-800">${s.title}</h4>
+                            <p class="text-xs text-slate-400">${s.user} • ${s.city}</p>
                         </div>
+                        <span class="font-bold text-emerald-600 text-sm">${s.price.toLocaleString()}</span>
                     </div>
                 `).join('');
             }
         }
 
-        // --- عرض الطلبات ---
+        // عرض الطلبات
         function renderRequests() {
             const container = document.getElementById('requests-list');
             if(!container) return;
-            
             container.innerHTML = requests.map(r => `
-                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-l-4 hover:border-l-orange-500 transition-all">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <h3 class="font-bold text-lg text-gray-800">${r.title}</h3>
-                            ${r.status === 'عاجل' ? '<span class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-bold">عاجل</span>' : '<span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full font-bold">جديد</span>'}
-                        </div>
-                        <p class="text-gray-600 text-sm mb-2">${r.desc}</p>
-                        <div class="text-xs text-gray-400 flex gap-3">
-                            <span><i class="fa-solid fa-location-dot"></i> ${r.city}</span>
-                            <span><i class="fa-solid fa-user"></i> ${r.user}</span>
-                        </div>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-3">
+                    <h4 class="font-bold text-slate-800">${r.title}</h4>
+                    <p class="text-slate-500 text-sm mt-1">${r.desc}</p>
+                    <div class="flex justify-between mt-3 text-xs text-slate-400">
+                        <span><i class="fa-solid fa-user ml-1"></i>${r.user}</span>
+                        <span><i class="fa-solid fa-location-dot ml-1"></i>${r.city}</span>
                     </div>
-                    <button class="border border-orange-500 text-orange-500 hover:bg-orange-50 px-5 py-2 rounded-lg font-bold text-sm transition w-full md:w-auto">تواصل مع الطالب</button>
                 </div>
             `).join('');
         }
 
-        // --- المصادقة (Auth) ---
+        // إدارة المستخدم
         function handleLogin(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
-            currentUser = { name: email.split('@')[0], email: email, role: 'provider' };
-            saveUser(); updateAuthUI(); navigate('home');
+            currentUser = { name: email.split('@')[0], email };
+            saveUser(); updateUI(); navigate('home');
         }
-
         function handleRegister(e) {
             e.preventDefault();
             const name = document.getElementById('reg-name').value;
             currentUser = { name, email: document.getElementById('reg-email').value };
-            saveUser(); updateAuthUI(); navigate('home');
+            saveUser(); updateUI(); navigate('home');
         }
-
         function logout() {
             currentUser = null;
-            localStorage.removeItem('sy_currentUser');
-            updateAuthUI();
-            navigate('home');
+            localStorage.removeItem('user');
+            updateUI(); navigate('login');
         }
+        function saveUser() { localStorage.setItem('user', JSON.stringify(currentUser)); }
 
-        function saveUser() { localStorage.setItem('sy_currentUser', JSON.stringify(currentUser)); }
-
-        function updateAuthUI() {
-            const guestNav = document.getElementById('guest-nav');
-            const userNav = document.getElementById('user-nav');
-            const mobileLoginBtn = document.getElementById('mobile-login-btn');
-            
-            if (currentUser) {
-                guestNav.classList.add('hidden');
-                userNav.classList.remove('hidden');
-                userNav.classList.add('flex');
-                document.getElementById('nav-username').innerText = currentUser.name;
-                
-                // تحديث زر الجوال
-                if(mobileLoginBtn) mobileLoginBtn.innerHTML = `<i class="fa-solid fa-user-check text-xl mb-1 text-green-600"></i><span class="text-xs text-green-600">حسابي</span>`;
+        function updateUI() {
+            renderServices();
+            renderRequests();
+            const desktopBtn = document.getElementById('desktop-auth-btn');
+            if(currentUser) {
+                if(desktopBtn) { desktopBtn.innerText = currentUser.name; desktopBtn.onclick = logout; }
             } else {
-                guestNav.classList.remove('hidden');
-                userNav.classList.add('hidden');
-                userNav.classList.remove('flex');
-                if(mobileLoginBtn) mobileLoginBtn.innerHTML = `<i class="fa-solid fa-user text-xl mb-1"></i><span class="text-xs">دخول</span>`;
+                if(desktopBtn) { desktopBtn.innerText = "تسجيل الدخول"; desktopBtn.onclick = () => navigate('login'); }
             }
         }
 
-        function checkAuthAndAction(actionType) {
-            if (!currentUser) { alert('يرجى تسجيل الدخول أولاً للمتابعة'); navigate('login'); return; }
-            if (actionType === 'addService') document.getElementById('modal-service').classList.remove('hidden');
-            if (actionType === 'addRequest') document.getElementById('modal-request').classList.remove('hidden');
+        // النوافذ
+        function checkAuthAndAction(action) {
+            if(!currentUser) { alert('يجب تسجيل الدخول أولاً'); navigate('login'); return; }
+            if(action === 'addService') document.getElementById('modal-service').classList.remove('hidden');
+            if(action === 'addRequest') document.getElementById('modal-request').classList.remove('hidden');
         }
-
-        // --- إدارة المودال ---
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
         function submitService(e) {
             e.preventDefault();
-            const newService = {
+            const newS = {
                 id: Date.now(),
                 title: document.getElementById('s-title').value,
                 cat: document.getElementById('s-cat').value,
                 desc: document.getElementById('s-desc').value,
-                price: parseFloat(document.getElementById('s-price').value),
+                price: Number(document.getElementById('s-price').value),
                 city: document.getElementById('s-city').value,
-                user: currentUser.name,
-                date: new Date().toISOString().split('T')[0]
+                user: currentUser.name
             };
-            services.unshift(newService);
-            localStorage.setItem('sy_services', JSON.stringify(services));
-            closeModal('modal-service'); e.target.reset(); renderServices(); navigate('services');
-            alert('تم نشر خدمتك بنجاح!');
+            services.unshift(newS); localStorage.setItem('services', JSON.stringify(services));
+            closeModal('modal-service'); renderServices(); navigate('services');
         }
-
+        
         function submitRequest(e) {
             e.preventDefault();
-            const newRequest = {
+            const newR = {
                 id: Date.now(),
                 title: document.getElementById('r-title').value,
                 desc: document.getElementById('r-desc').value,
                 city: document.getElementById('r-city').value,
-                user: currentUser.name,
-                status: 'جديد'
+                user: currentUser.name
             };
-            requests.unshift(newRequest);
-            localStorage.setItem('sy_requests', JSON.stringify(requests));
-            closeModal('modal-request'); e.target.reset(); renderRequests(); navigate('requests');
-            alert('تم نشر طلبك بنجاح!');
+            requests.unshift(newR); localStorage.setItem('requests', JSON.stringify(requests));
+            closeModal('modal-request'); renderRequests(); navigate('requests');
         }
 
+        // تشغيل
         init();
     </script>
 </body>
