@@ -8,16 +8,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <style>
         body { font-family: 'Tajawal', sans-serif; background-color: #f8fafc; }
-        
-        /* تأثيرات الحركة */
         .fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* تخصيص المدخلات */
-        .input-group:focus-within i { color: #d97706; } /* لون ذهبي عند الكتابة */
+        .input-group:focus-within i { color: #d97706; }
         .input-group:focus-within { border-color: #d97706; ring: 2px; }
     </style>
 </head>
@@ -25,85 +23,98 @@
 
     <div class="w-full h-screen flex overflow-hidden bg-white shadow-2xl rounded-none md:rounded-3xl max-w-[1600px] mx-auto my-0 md:my-4 md:h-[95vh]">
         
-        <div class="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-20 py-10 bg-white fade-in relative z-10">
+        <div class="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-20 py-10 bg-white fade-in relative z-10 overflow-y-auto">
             
             <a href="index.html" class="absolute top-8 right-8 text-slate-400 hover:text-slate-800 transition flex items-center gap-2 text-sm font-bold">
-                <i class="fa-solid fa-arrow-right"></i> العودة للرئيسية
+                <i class="fa-solid fa-arrow-right"></i> الرئيسية
             </a>
 
-            <div class="mb-10 text-center md:text-right">
-                <div class="inline-flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 bg-slate-900 text-amber-400 rounded-xl flex items-center justify-center shadow-lg">
-                        <i class="fa-solid fa-shield-halved text-2xl"></i>
+            <div class="mb-8 text-center md:text-right mt-10 md:mt-0">
+                <div class="inline-flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-slate-900 text-amber-400 rounded-xl flex items-center justify-center shadow-lg">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
                     </div>
-                    <h1 class="text-3xl font-extrabold text-slate-900 tracking-wide">سَنَد</h1>
+                    <h1 class="text-2xl font-extrabold text-slate-900 tracking-wide">سَنَد</h1>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-800 mb-2">مرحباً بعودتك!</h2>
-                <p class="text-slate-500">من فضلك أدخل بياناتك للمتابعة</p>
+                <h2 class="text-2xl font-bold text-slate-800 mb-1">مرحباً بعودتك</h2>
+                <p class="text-slate-500 text-sm">أدخل بياناتك أو استخدم حساب جوجل</p>
             </div>
 
-            <form onsubmit="handleLogin(event)" class="space-y-6">
+            <div class="mb-6">
+                <div id="g_id_onload"
+                     data-client_id="YOUR_CLIENT_ID"
+                     data-context="signin"
+                     data-ux_mode="popup"
+                     data-callback="handleGoogleLogin"
+                     data-auto_prompt="false">
+                </div>
+
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-shape="rectangular"
+                     data-theme="outline"
+                     data-text="signin_with"
+                     data-size="large"
+                     data-logo_alignment="left"
+                     data-width="100%">
+                </div>
                 
-                <div>
-                    <label class="block text-sm font-bold text-slate-700 mb-2">البريد الإلكتروني</label>
-                    <div class="input-group flex items-center border border-slate-200 bg-slate-50 rounded-xl px-4 py-3.5 transition-all duration-300">
-                        <i class="fa-regular fa-envelope text-slate-400 text-lg ml-3 transition-colors"></i>
-                        <input type="email" id="email" required placeholder="name@example.com" class="w-full bg-transparent outline-none text-slate-700 font-medium placeholder-slate-400">
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex justify-between items-center mb-2">
-                        <label class="block text-sm font-bold text-slate-700">كلمة المرور</label>
-                        <a href="#" class="text-xs text-amber-600 font-bold hover:underline">نسيت كلمة المرور؟</a>
-                    </div>
-                    <div class="input-group flex items-center border border-slate-200 bg-slate-50 rounded-xl px-4 py-3.5 transition-all duration-300 relative">
-                        <i class="fa-solid fa-lock text-slate-400 text-lg ml-3 transition-colors"></i>
-                        <input type="password" id="password" required placeholder="••••••••" class="w-full bg-transparent outline-none text-slate-700 font-medium placeholder-slate-400">
-                        
-                        <button type="button" onclick="togglePass()" class="text-slate-400 hover:text-slate-600 outline-none">
-                            <i id="eye-icon" class="fa-regular fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/20 transform hover:-translate-y-1">
-                    تسجيل الدخول
+                <button onclick="simulateGoogleLogin()" class="w-full border border-slate-300 bg-white text-slate-700 py-3 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-slate-50 transition mt-3">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
+                    تسجيل الدخول عبر Google
                 </button>
+            </div>
 
+            <div class="relative flex py-2 items-center mb-6">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span class="flex-shrink-0 mx-4 text-slate-400 text-xs font-bold uppercase">أو عبر البريد</span>
+                <div class="flex-grow border-t border-slate-200"></div>
+            </div>
+
+            <form onsubmit="handleLogin(event)" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">البريد الإلكتروني</label>
+                    <div class="input-group flex items-center border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 transition-all">
+                        <i class="fa-regular fa-envelope text-slate-400 ml-3"></i>
+                        <input type="email" id="email" required placeholder="name@example.com" class="w-full bg-transparent outline-none text-slate-700 font-medium text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label class="block text-xs font-bold text-slate-700">كلمة المرور</label>
+                        <a href="#" class="text-xs text-amber-600 font-bold hover:underline">نسيت؟</a>
+                    </div>
+                    <div class="input-group flex items-center border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 transition-all">
+                        <i class="fa-solid fa-lock text-slate-400 ml-3"></i>
+                        <input type="password" id="password" required placeholder="••••••••" class="w-full bg-transparent outline-none text-slate-700 font-medium text-sm">
+                        <button type="button" onclick="togglePass()" class="text-slate-400 hover:text-slate-600"><i id="eye-icon" class="fa-regular fa-eye"></i></button>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-slate-900 text-white py-3.5 rounded-xl font-bold hover:bg-slate-800 transition shadow-lg transform hover:-translate-y-1">
+                    دخول
+                </button>
             </form>
 
             <div class="mt-8 text-center">
-                <p class="text-slate-500 font-medium">
-                    ليس لديك حساب؟ 
-                    <a href="#" class="text-amber-600 font-bold hover:text-amber-700 hover:underline transition">أنشئ حساباً جديداً</a>
+                <p class="text-slate-500 text-sm">
+                    ليس لديك حساب؟ <a href="#" class="text-amber-600 font-bold hover:underline">إنشاء حساب</a>
                 </p>
             </div>
             
-            <div class="mt-12 text-center text-xs text-slate-300">
-                &copy; 2025 منصة سَنَد للخدمات. جميع الحقوق محفوظة.
+            <div class="mt-8 text-center text-[10px] text-slate-300">
+                &copy; 2025 منصة سَنَد. جميع الحقوق محفوظة.
             </div>
         </div>
 
         <div class="hidden md:flex w-1/2 bg-slate-900 relative items-center justify-center overflow-hidden">
             <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
-            
             <div class="absolute -top-20 -right-20 w-96 h-96 bg-amber-500 rounded-full blur-[100px] opacity-20"></div>
-            <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-slate-900 to-transparent z-10"></div>
-
             <div class="relative z-20 text-center p-12 max-w-lg">
-                <div class="mb-8 flex justify-center">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2452/2452207.png" alt="Sanad" class="w-40 drop-shadow-2xl animate-pulse">
-                </div>
-                <h3 class="text-4xl font-bold text-white mb-4 leading-relaxed">المنصة الأولى للخدمات في سوريا</h3>
-                <p class="text-slate-300 text-lg font-light leading-loose">
-                    سواء كنت تبحث عن محترف لإنجاز أعمالك، أو تريد تقديم خدماتك للجمهور. سَنَد هي وجهتك الموثوقة.
-                </p>
-                
-                <div class="mt-8 flex justify-center gap-1 text-amber-400">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-slate-500 text-sm mt-2">موثوق من قبل +10,000 مستخدم</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/2452/2452207.png" alt="Sanad" class="w-32 mx-auto mb-8 drop-shadow-2xl">
+                <h3 class="text-3xl font-bold text-white mb-4">خدماتك كلها بمكان واحد</h3>
+                <p class="text-slate-300 text-lg font-light leading-relaxed">انضم لأكثر من 10,000 مستخدم في سوريا واستمتع بتجربة خدمات احترافية.</p>
             </div>
         </div>
 
@@ -124,23 +135,48 @@
             }
         }
 
+        // تسجيل الدخول العادي
         function handleLogin(e) {
             e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            
-            // تأثير التحميل
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin ml-2"></i> جاري الدخول...';
-            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            const email = document.getElementById('email').value;
+            loginUser(email.split('@')[0], email);
+        }
 
+        // محاكاة تسجيل دخول جوجل (لأننا لا نملك Client ID حقيقي الآن)
+        function simulateGoogleLogin() {
+            // محاكاة تأخير الشبكة
+            const btn = document.querySelector('button[onclick="simulateGoogleLogin()"]');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> جاري الاتصال بجوجل...';
+            
             setTimeout(() => {
-                // حفظ بيانات وهمية وتوجيه
-                localStorage.setItem('user', JSON.stringify({
-                    name: document.getElementById('email').value.split('@')[0],
-                    email: document.getElementById('email').value
-                }));
-                window.location.href = 'index.html'; // توجيه للصفحة الرئيسية
+                loginUser('Google User', 'user@gmail.com');
             }, 1500);
+        }
+
+        // دالة Google الرسمية (ستعمل فقط إذا وضعت Client ID صحيح)
+        function handleGoogleLogin(response) {
+            // فك تشفير البيانات (JWT) - في التطبيق الحقيقي يتم هذا في الباك اند
+            console.log("Encoded JWT ID token: " + response.credential);
+            const responsePayload = decodeJwtResponse(response.credential);
+            loginUser(responsePayload.name, responsePayload.email);
+        }
+
+        // دالة مساعدة لفك تشفير رد جوجل
+        function decodeJwtResponse(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
+        // المنطق المشترك للحفظ والتوجيه
+        function loginUser(name, email) {
+            localStorage.setItem('user', JSON.stringify({ name: name, email: email }));
+            alert(`مرحباً بك يا ${name}!`);
+            window.location.href = 'index.html';
         }
     </script>
 </body>
